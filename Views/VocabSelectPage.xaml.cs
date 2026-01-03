@@ -1,8 +1,8 @@
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
+using VocaFlow.Models;
+using VocaFlow.Services;
 using System.Text.Json;
 
-namespace QQLyric2Roma.Views
+namespace VocaFlow.Views
 {
     [QueryProperty(nameof(VocabResultJson), "VocabResultJson")]
     public partial class VocabSelectPage : ContentPage

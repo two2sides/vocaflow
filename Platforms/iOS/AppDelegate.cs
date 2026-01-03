@@ -1,6 +1,6 @@
-﻿using Foundation;
+using Foundation;
 
-namespace QQLyric2Roma
+namespace VocaFlow
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQLyric2Roma.Models
+namespace VocaFlow.Models
 {
     public class Song
     {

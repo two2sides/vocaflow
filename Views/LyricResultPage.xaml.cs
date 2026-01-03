@@ -1,9 +1,9 @@
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
-using QQLyric2Roma.Utils;
+using VocaFlow.Models;
+using VocaFlow.Services;
+using VocaFlow.Utils;
 using System.Text.Json;
 
-namespace QQLyric2Roma.Views
+namespace VocaFlow.Views
 {
     // QueryProperty 用于接收上一个页面传来的参数
     [QueryProperty(nameof(SongMid), "SongMid")]

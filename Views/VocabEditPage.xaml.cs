@@ -1,9 +1,9 @@
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
+using VocaFlow.Models;
+using VocaFlow.Services;
 using System.Text.Json;
 using Microsoft.Maui.Controls.Shapes;
 
-namespace QQLyric2Roma.Views;
+namespace VocaFlow.Views;
 
 [QueryProperty(nameof(VocabId), "VocabId")]
 public partial class VocabEditPage : ContentPage

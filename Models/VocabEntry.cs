@@ -1,7 +1,7 @@
 using SQLite;
 using System.Text.Json;
 
-namespace QQLyric2Roma.Models
+namespace VocaFlow.Models
 {
     /// <summary>
     /// 词汇条目实体

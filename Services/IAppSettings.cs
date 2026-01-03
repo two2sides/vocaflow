@@ -1,7 +1,7 @@
-namespace QQLyric2Roma.Services
+namespace VocaFlow.Services
 {
     /// <summary>
-    /// Ó¦ÓÃÅäÖÃ³éÏó½Ó¿Ú
+    /// åº”ç”¨é…ç½®æŠ½è±¡æ¥å£
     /// </summary>
     public interface IAppSettings
     {
@@ -11,22 +11,22 @@ namespace QQLyric2Roma.Services
         string ApiKey { get; set; }
 
         /// <summary>
-        /// AI Ä£ĞÍÃû³Æ
+        /// AI æ¨¡å‹åç§°
         /// </summary>
         string AiModel { get; set; }
 
         /// <summary>
-        /// ÂŞÂíÒô×ª»» Prompt
+        /// ç½—é©¬éŸ³è½¬æ¢ Prompt
         /// </summary>
         string RomaPrompt { get; set; }
 
         /// <summary>
-        /// Éú´ÊÌáÈ¡ Prompt
+        /// ç”Ÿè¯æå– Prompt
         /// </summary>
         string VocabPrompt { get; set; }
 
         /// <summary>
-        /// ¼ì²é API Key ÊÇ·ñÒÑÅäÖÃ
+        /// æ£€æŸ¥ API Key æ˜¯å¦å·²é…ç½®
         /// </summary>
         bool HasApiKey { get; }
     }

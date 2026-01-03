@@ -1,7 +1,7 @@
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
+using VocaFlow.Models;
+using VocaFlow.Services;
 
-namespace QQLyric2Roma.Views;
+namespace VocaFlow.Views;
 
 [QueryProperty(nameof(Language), "Language")]
 [QueryProperty(nameof(Count), "Count")]

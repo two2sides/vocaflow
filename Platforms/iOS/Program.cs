@@ -1,7 +1,7 @@
-﻿using ObjCRuntime;
+using ObjCRuntime;
 using UIKit;
 
-namespace QQLyric2Roma
+namespace VocaFlow
 {
     public class Program
     {

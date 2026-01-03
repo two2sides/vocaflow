@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using QQLyric2Roma.Utils;
+using Microsoft.Extensions.DependencyInjection;
+using VocaFlow.Utils;
 
-namespace QQLyric2Roma
+namespace VocaFlow
 {
     public partial class App : Application
     {

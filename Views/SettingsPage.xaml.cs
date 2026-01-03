@@ -1,7 +1,7 @@
-using QQLyric2Roma.Services;
-using QQLyric2Roma.Utils;
+using VocaFlow.Services;
+using VocaFlow.Utils;
 
-namespace QQLyric2Roma.Views
+namespace VocaFlow.Views
 {
     public partial class SettingsPage : ContentPage
     {

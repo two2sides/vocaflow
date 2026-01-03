@@ -1,7 +1,7 @@
-﻿using Android.App;
+using Android.App;
 using Android.Runtime;
 
-namespace QQLyric2Roma
+namespace VocaFlow
 {
     [Application]
     public class MainApplication : MauiApplication

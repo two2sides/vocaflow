@@ -1,10 +1,10 @@
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
-using QQLyric2Roma.Utils;
+using VocaFlow.Models;
+using VocaFlow.Services;
+using VocaFlow.Utils;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace QQLyric2Roma.Views
+namespace VocaFlow.Views
 {
     public partial class SearchPage : ContentPage
     {

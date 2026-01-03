@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
-namespace QQLyric2Roma.Utils // 注意：这里的命名空间根据你的项目自行修改  
+namespace VocaFlow.Utils // 注意：这里的命名空间根据你的项目自行修改  
 {
     public static class QQMusicApi
     {

@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 
-namespace QQLyric2Roma.Models
+namespace VocaFlow.Models
 {
     /// <summary>
-    /// AI ·µ»ØµÄ´Ê»ãÌáÈ¡½á¹û
+    /// AI è¿”å›çš„è¯æ±‡æå–ç»“æœ
     /// </summary>
     public class AiVocabResult
     {
@@ -15,7 +15,7 @@ namespace QQLyric2Roma.Models
     }
 
     /// <summary>
-    /// µ¥¸ö´Ê»ãÏî
+    /// å•ä¸ªè¯æ±‡é¡¹
     /// </summary>
     public class AiVocabItem
     {
@@ -32,32 +32,32 @@ namespace QQLyric2Roma.Models
         public string Usage { get; set; }
 
         /// <summary>
-        /// ÓÃÓÚ UI °ó¶¨£ºÊÇ·ñ±»Ñ¡ÖĞ
+        /// ç”¨äº UI ç»‘å®šï¼šæ˜¯å¦è¢«é€‰ä¸­
         /// </summary>
         [JsonIgnore]
         public bool IsSelected { get; set; } = true;
 
         /// <summary>
-        /// ÏÔÊ¾ÓÃµÄÖ÷Òª¶ÁÒô
+        /// æ˜¾ç¤ºç”¨çš„ä¸»è¦è¯»éŸ³
         /// </summary>
         [JsonIgnore]
         public string DisplayReading => Readings?.FirstOrDefault()?.Reading ?? "";
 
         /// <summary>
-        /// ÏÔÊ¾ÓÃµÄÖ÷ÒªÒâË¼
+        /// æ˜¾ç¤ºç”¨çš„ä¸»è¦æ„æ€
         /// </summary>
         [JsonIgnore]
         public string DisplayMeaning => Readings?.FirstOrDefault()?.Meaning ?? "";
 
         /// <summary>
-        /// ÊÇ·ñÓĞ¶à¸ö¶ÁÒô/ÒâË¼
+        /// æ˜¯å¦æœ‰å¤šä¸ªè¯»éŸ³/æ„æ€
         /// </summary>
         [JsonIgnore]
         public bool HasMultipleReadings => Readings != null && Readings.Count > 1;
     }
 
     /// <summary>
-    /// ´Ê»ãµÄ¶ÁÒô/ÒâË¼/Àı¾ä
+    /// è¯æ±‡çš„è¯»éŸ³/æ„æ€/ä¾‹å¥
     /// </summary>
     public class AiVocabReading
     {

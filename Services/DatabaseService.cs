@@ -1,7 +1,7 @@
-using QQLyric2Roma.Models;
+using VocaFlow.Models;
 using SQLite;
 
-namespace QQLyric2Roma.Services
+namespace VocaFlow.Services
 {
     /// <summary>
     /// SQLite 数据库服务实现

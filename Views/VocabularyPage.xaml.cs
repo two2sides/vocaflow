@@ -1,7 +1,7 @@
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
+using VocaFlow.Models;
+using VocaFlow.Services;
 
-namespace QQLyric2Roma.Views;
+namespace VocaFlow.Views;
 
 public partial class VocabularyPage : ContentPage
 {

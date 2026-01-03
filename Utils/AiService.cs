@@ -1,10 +1,10 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using QQLyric2Roma.Models;
-using QQLyric2Roma.Services;
+using VocaFlow.Models;
+using VocaFlow.Services;
 
-namespace QQLyric2Roma.Utils
+namespace VocaFlow.Utils
 {
     public static class AiService
     {
@@ -101,8 +101,8 @@ namespace QQLyric2Roma.Utils
 
             var request = new HttpRequestMessage(HttpMethod.Post, OpenRouterUrl);
             request.Headers.Add("Authorization", $"Bearer {settings.ApiKey}");
-            request.Headers.Add("HTTP-Referer", "https://github.com/YourName/QQLyric2Roma");
-            request.Headers.Add("X-Title", "QQLyric2Roma");
+            request.Headers.Add("HTTP-Referer", "https://github.com/YourName/VocaFlow");
+            request.Headers.Add("X-Title", "VocaFlow");
             request.Content = jsonContent;
 
             try
@@ -157,8 +157,8 @@ namespace QQLyric2Roma.Utils
 
             var request = new HttpRequestMessage(HttpMethod.Post, OpenRouterUrl);
             request.Headers.Add("Authorization", $"Bearer {apiKey}");
-            request.Headers.Add("HTTP-Referer", "https://github.com/YourName/QQLyric2Roma");
-            request.Headers.Add("X-Title", "QQLyric2Roma");
+            request.Headers.Add("HTTP-Referer", "https://github.com/YourName/VocaFlow");
+            request.Headers.Add("X-Title", "VocaFlow");
             request.Content = jsonContent;
 
             try

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQLyric2Roma.Utils
+namespace VocaFlow.Utils
 {
     public static class Constants
     {

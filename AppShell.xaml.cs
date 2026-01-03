@@ -1,6 +1,6 @@
-using QQLyric2Roma.Views;
+using VocaFlow.Views;
 
-namespace QQLyric2Roma
+namespace VocaFlow
 {
     public partial class AppShell : Shell
     {

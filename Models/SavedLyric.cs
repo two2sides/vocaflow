@@ -1,9 +1,9 @@
 using SQLite;
 
-namespace QQLyric2Roma.Models
+namespace VocaFlow.Models
 {
     /// <summary>
-    /// ±£´æµÄ¸è´ÊÊµÌå
+    /// ä¿å­˜çš„æ­Œè¯å®ä½“
     /// </summary>
     public class SavedLyric
     {
@@ -11,49 +11,49 @@ namespace QQLyric2Roma.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// ¸èÇú MID
+        /// æ­Œæ›² MID
         /// </summary>
         public string SongMid { get; set; }
 
         /// <summary>
-        /// ¸èÇú±êÌâ
+        /// æ­Œæ›²æ ‡é¢˜
         /// </summary>
         public string SongTitle { get; set; }
 
         /// <summary>
-        /// ¸èÊÖ
+        /// æ­Œæ‰‹
         /// </summary>
         public string Artist { get; set; }
 
         /// <summary>
-        /// Ô­Ê¼¸è´Ê
+        /// åŸå§‹æ­Œè¯
         /// </summary>
         public string OriginalLyric { get; set; }
 
         /// <summary>
-        /// ÂŞÂíÒô
+        /// ç½—é©¬éŸ³
         /// </summary>
         public string Romaji { get; set; }
 
         /// <summary>
-        /// ´´½¨Ê±¼ä
+        /// åˆ›å»ºæ—¶é—´
         /// </summary>
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
-        /// ÓÃÓÚÁĞ±íÏÔÊ¾
+        /// ç”¨äºåˆ—è¡¨æ˜¾ç¤º
         /// </summary>
         [Ignore]
         public string DisplayText => $"{SongTitle} - {Artist}";
 
         /// <summary>
-        /// ¸ñÊ½»¯µÄ´´½¨Ê±¼ä
+        /// æ ¼å¼åŒ–çš„åˆ›å»ºæ—¶é—´
         /// </summary>
         [Ignore]
         public string CreatedAtText => CreatedAt.ToString("yyyy-MM-dd HH:mm");
 
         /// <summary>
-        /// ÊÇ·ñÑ¡ÖĞ£¨ÓÃÓÚÅúÁ¿É¾³ı£©
+        /// æ˜¯å¦é€‰ä¸­ï¼ˆç”¨äºæ‰¹é‡åˆ é™¤ï¼‰
         /// </summary>
         [Ignore]
         public bool IsSelected { get; set; }

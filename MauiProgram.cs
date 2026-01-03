@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
-using QQLyric2Roma.Services;
-using QQLyric2Roma.Views;
+using VocaFlow.Services;
+using VocaFlow.Views;
 
-namespace QQLyric2Roma
+namespace VocaFlow
 {
     public static class MauiProgram
     {

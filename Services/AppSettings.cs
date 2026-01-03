@@ -1,9 +1,9 @@
-using QQLyric2Roma.Utils;
+using VocaFlow.Utils;
 
-namespace QQLyric2Roma.Services
+namespace VocaFlow.Services
 {
     /// <summary>
-    /// »ùÓÚ Preferences µÄÅäÖÃÊµÏÖ
+    /// åŸºäº Preferences çš„é…ç½®å®ç°
     /// </summary>
     public class AppSettings : IAppSettings
     {

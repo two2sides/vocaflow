@@ -1,6 +1,6 @@
-using QQLyric2Roma.Models;
+using VocaFlow.Models;
 
-namespace QQLyric2Roma.Services
+namespace VocaFlow.Services
 {
     /// <summary>
     /// 数据库服务接口
