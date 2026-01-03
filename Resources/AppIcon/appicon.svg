@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="456" height="456" fill="#512BD4" />
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="512" height="512" rx="128" fill="#B39DDB"/>
+    
+    <g transform="translate(64, 64)">
+        <path d="M76.8 96C76.8 96 115.2 256 153.6 320C172.8 352 211.2 352 230.4 320" stroke="white" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <path d="M192 320C211.2 288 230.4 224 249.6 192C268.8 160 288 192 307.2 224C326.4 256 345.6 128 364.8 96C374.4 80 403.2 80 422.4 96" stroke="white" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <circle cx="307.2" cy="160" r="16" fill="white"/>
+        <circle cx="384" cy="224" r="12" fill="white" fill-opacity="0.7"/>
+        <circle cx="435.2" cy="140" r="8" fill="white" fill-opacity="0.5"/>
+    </g>
+    
+    <path d="M0 128C0 57.3071 57.3071 0 128 0H512V512H128C57.3071 512 0 454.693 0 384V128Z" fill="white" fill-opacity="0.05"/>
 </svg>
