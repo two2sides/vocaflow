@@ -88,6 +88,13 @@ namespace QQLyric2Roma.Services
         /// </summary>
         Task<VocabEntry> GetVocabByWordAsync(string word, string language);
 
+        /// <summary>
+        /// 获取随机词汇
+        /// </summary>
+        /// <param name="count">数量</param>
+        /// <param name="language">语言（可选，null 表示全部）</param>
+        Task<List<VocabEntry>> GetRandomVocabsAsync(int count, string language = null);
+
         #endregion
     }
 }

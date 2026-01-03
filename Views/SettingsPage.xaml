@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QQLyric2Roma.Views.SettingsPage"
@@ -6,39 +6,148 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <VerticalStackLayout Spacing="5">
-                <Label Text="OpenRouter Key" FontAttributes="Bold"/>
-                <Entry x:Name="EntryApiKey" Placeholder="sk-xxxxxxxx" IsPassword="True"/>
-            </VerticalStackLayout>
+            <!-- 页面标题区域 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource SurfaceDark}}">
+                <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Label Text="⚙️" FontSize="28"/>
+                    <Label Text="应用设置" 
+                           FontSize="22" 
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Border>
 
-            <VerticalStackLayout Spacing="5">
-                <Label Text="AI 模型名称 (默认为grok-4.1-fast)" FontAttributes="Bold"/>
-                <Label Text="例如: x-ai/grok-4.1-fast" FontSize="12" TextColor="Gray"/>
-                <Entry x:Name="EntryModel" Placeholder="请输入模型名称" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="5">
-                <Label Text="提取罗马音时的Prompt" FontAttributes="Bold"/>
-                <Editor x:Name="RomaPrompt" 
-                        Placeholder="请输入Prompt"
-                        HeightRequest="150"
-                        AutoSize="TextChanges"
-                        BackgroundColor="#F5F5F5"/>
-            </VerticalStackLayout>
+            <!-- API Key 设置卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="🔑" FontSize="18"/>
+                        <Label Text="OpenRouter API Key" 
+                               FontAttributes="Bold"
+                               FontSize="16"/>
+                    </HorizontalStackLayout>
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="{StaticResource Gray200}"
+                            StrokeThickness="1"
+                            Padding="12,8"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                        <Entry x:Name="EntryApiKey" 
+                               Placeholder="sk-xxxxxxxx" 
+                               IsPassword="True"
+                               BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
 
-            <VerticalStackLayout Spacing="5">
-                <Label Text="提取生词时的Prompt" FontAttributes="Bold"/>
-                <Editor x:Name="VocabPrompt" 
-                        Placeholder="请输入Prompt"
-                        HeightRequest="150"
-                        AutoSize="TextChanges"
-                        BackgroundColor="#F5F5F5"/>
-            </VerticalStackLayout>
+            <!-- AI 模型设置卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="🤖" FontSize="18"/>
+                        <Label Text="AI 模型名称" 
+                               FontAttributes="Bold"
+                               FontSize="16"/>
+                    </HorizontalStackLayout>
+                    <Label Text="默认: grok-4.1-fast | 示例: x-ai/grok-4.1-fast" 
+                           FontSize="12" 
+                           TextColor="{StaticResource Gray500}"/>
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="{StaticResource Gray200}"
+                            StrokeThickness="1"
+                            Padding="12,8"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                        <Entry x:Name="EntryModel" 
+                               Placeholder="请输入模型名称"
+                               BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
 
-            <Button Text="保存设置" 
+            <!-- Prompt 设置卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="16">
+                    <!-- 罗马音 Prompt -->
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="🎵" FontSize="18"/>
+                            <Label Text="罗马音提取 Prompt" 
+                                   FontAttributes="Bold"
+                                   FontSize="16"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Editor x:Name="RomaPrompt" 
+                                    Placeholder="请输入Prompt"
+                                    HeightRequest="120"
+                                    AutoSize="TextChanges"
+                                    BackgroundColor="Transparent"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1" Color="{StaticResource Gray200}"/>
+
+                    <!-- 生词提取 Prompt -->
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="📚" FontSize="18"/>
+                            <Label Text="生词提取 Prompt" 
+                                   FontAttributes="Bold"
+                                   FontSize="16"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Editor x:Name="VocabPrompt" 
+                                    Placeholder="请输入Prompt"
+                                    HeightRequest="120"
+                                    AutoSize="TextChanges"
+                                    BackgroundColor="Transparent"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 保存按钮 -->
+            <Button Text="💾 保存设置" 
                     Clicked="OnSaveClicked"
-                    BackgroundColor="#512BD4"
-                    TextColor="White"
-                    CornerRadius="8"/>
+                    FontSize="16"
+                    Margin="0,10"/>
 
         </VerticalStackLayout>
     </ScrollView>

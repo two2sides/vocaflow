@@ -168,6 +168,23 @@ namespace QQLyric2Roma.Services
                             .FirstOrDefaultAsync();
         }
 
+        public async Task<List<VocabEntry>> GetRandomVocabsAsync(int count, string language = null)
+        {
+            await InitAsync();
+
+            var query = _db.Table<VocabEntry>();
+            if (!string.IsNullOrEmpty(language))
+            {
+                query = query.Where(x => x.Language == language);
+            }
+
+            var allItems = await query.ToListAsync();
+
+            // 随机打乱并取前 N 个
+            var random = new Random();
+            return allItems.OrderBy(x => random.Next()).Take(count).ToList();
+        }
+
         #endregion
     }
 }

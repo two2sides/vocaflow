@@ -5,59 +5,143 @@
              Title="歌词详情">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20"
-                             Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Label x:Name="LblTitle"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
+            <!-- 歌曲标题卡片 -->
+            <Border StrokeShape="RoundRectangle 20"
+                    Stroke="Transparent"
+                    Padding="24,20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource SurfaceDark}}">
+                <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Label Text="🎵" FontSize="28"/>
+                    <Label x:Name="LblTitle"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Border>
 
-            <Grid ColumnDefinitions="*,*"
-                  ColumnSpacing="10">
-                <Button Grid.Column="0"
-                        Text="AI 生成罗马音"
-                        BackgroundColor="#512BD4"
-                        TextColor="White"
-                        Clicked="OnGenerateRomajiClicked"/>
-                <Button Grid.Column="1"
-                        Text="AI 提取生词"
-                        BackgroundColor="#0078D4"
-                        TextColor="White"
-                        Clicked="OnExtractVocabClicked"/>
+            <!-- AI 功能按钮 -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border Grid.Column="0"
+                        StrokeShape="RoundRectangle 14"
+                        Stroke="Transparent"
+                        BackgroundColor="{StaticResource Primary}">
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Primary}"
+                                Offset="0,4"
+                                Radius="12"
+                                Opacity="0.25"/>
+                    </Border.Shadow>
+                    <Button Text="✨ AI 罗马音"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            FontSize="14"
+                            Clicked="OnGenerateRomajiClicked"/>
+                </Border>
+                <Border Grid.Column="1"
+                        StrokeShape="RoundRectangle 14"
+                        Stroke="Transparent"
+                        BackgroundColor="{StaticResource Tertiary}">
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Tertiary}"
+                                Offset="0,4"
+                                Radius="12"
+                                Opacity="0.25"/>
+                    </Border.Shadow>
+                    <Button Text="📚 提取生词"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            FontSize="14"
+                            Clicked="OnExtractVocabClicked"/>
+                </Border>
             </Grid>
 
-            <Grid ColumnDefinitions="*,*"
-                  ColumnSpacing="10">
+            <!-- 操作按钮 -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                 <Button Grid.Column="0"
-                        Text="复制原文"
+                        Text="📋 复制原文"
+                        Style="{StaticResource SecondaryButton}"
+                        FontSize="14"
                         Clicked="OnCopyOriginalClicked"/>
                 <Button Grid.Column="1"
-                        Text="保存歌词"
+                        Text="💾 保存歌词"
+                        Style="{StaticResource SuccessButton}"
+                        FontSize="14"
                         Clicked="OnSaveVocabClicked"/>
             </Grid>
 
-            <Label Text="原文歌词:"
-                   FontAttributes="Bold"
-                   Margin="0,10,0,0"/>
+            <!-- 原文歌词卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="📝" FontSize="16"/>
+                        <Label Text="原文歌词"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="{StaticResource Primary}"/>
+                    </HorizontalStackLayout>
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="{StaticResource Gray200}"
+                            StrokeThickness="1"
+                            Padding="14"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                        <Editor x:Name="EditorOriginal"
+                                AutoSize="TextChanges"
+                                IsReadOnly="True"
+                                BackgroundColor="Transparent"
+                                FontSize="15"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
 
-            <Editor x:Name="EditorOriginal"
-                    AutoSize="TextChanges"
-                    IsReadOnly="True"
-                    BackgroundColor="#F0F0F0"/>
+            <!-- AI 结果卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="🤖" FontSize="16"/>
+                        <Label Text="AI 罗马音 / 翻译"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="{StaticResource Tertiary}"/>
+                    </HorizontalStackLayout>
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="Transparent"
+                            Padding="14"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource TertiaryLight}, Dark={StaticResource SurfaceDark}}">
+                        <Editor x:Name="EditorRomaji"
+                                AutoSize="TextChanges"
+                                IsReadOnly="True"
+                                BackgroundColor="Transparent"
+                                FontSize="15"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
 
-            <Label Text="AI 罗马音 / 翻译:"
-                   FontAttributes="Bold"
-                   Margin="0,10,0,0"/>
-
-            <Editor x:Name="EditorRomaji"
-                    AutoSize="TextChanges"
-                    IsReadOnly="True"
-                    BackgroundColor="#E0F7FA"/>
-
+            <!-- 加载指示器 -->
             <ActivityIndicator x:Name="AiLoading"
                                IsRunning="False"
-                               Color="#512BD4"/>
+                               Color="{StaticResource Primary}"
+                               HeightRequest="40"/>
 
         </VerticalStackLayout>
     </ScrollView>

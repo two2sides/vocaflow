@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QQLyric2Roma.Views.VocabReviewPage"
+             Title="随机复习">
+
+    <Grid RowDefinitions="Auto,*,Auto,Auto" Padding="20">
+        
+        <!-- 顶部：标题和进度 -->
+        <Border Grid.Row="0" 
+                Padding="20,16"
+                StrokeShape="RoundRectangle 16"
+                Stroke="Transparent"
+                BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource SurfaceDark}}">
+            <VerticalStackLayout Spacing="8">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                    <Label Text="🎴" FontSize="24"/>
+                    <Label x:Name="LblLanguage" 
+                           Text="日语复习" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"/>
+                </HorizontalStackLayout>
+                <Label x:Name="LblProgress" 
+                       Text="进度: 1 / 10" 
+                       FontSize="14" 
+                       TextColor="{StaticResource Gray500}"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- 中间：词汇卡片 -->
+        <Border Grid.Row="1" 
+                Margin="0,20"
+                Padding="0"
+                StrokeShape="RoundRectangle 24"
+                Stroke="Transparent"
+                BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource Primary}"
+                        Offset="0,8"
+                        Radius="30"
+                        Opacity="0.15"/>
+            </Border.Shadow>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCardTapped"/>
+            </Border.GestureRecognizers>
+            
+            <Grid RowDefinitions="Auto,*">
+                <!-- 卡片顶部装饰条 -->
+                <BoxView Grid.Row="0"
+                         HeightRequest="6"
+                         BackgroundColor="{StaticResource Primary}"
+                         VerticalOptions="Start"/>
+                
+                <ScrollView Grid.Row="1" Padding="28,20">
+                    <VerticalStackLayout Spacing="16" VerticalOptions="Center">
+                        <!-- 词语（始终显示） -->
+                        <Label x:Name="LblWord" 
+                               Text="桜"
+                               FontSize="42"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalOptions="Center"/>
+                        
+                        <!-- 提示文本 -->
+                        <Border x:Name="HintBorder"
+                                StrokeShape="RoundRectangle 20"
+                                Stroke="Transparent"
+                                Padding="16,10"
+                                BackgroundColor="{StaticResource SecondaryLight}"
+                                HorizontalOptions="Center">
+                            <HorizontalStackLayout Spacing="6">
+                                <Label Text="👆" FontSize="14"/>
+                                <Label x:Name="LblHint"
+                                       Text="点击卡片查看详情"
+                                       FontSize="13"
+                                       TextColor="{StaticResource Secondary}"/>
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <!-- 详细信息（点击后显示） -->
+                        <VerticalStackLayout x:Name="DetailSection" 
+                                             IsVisible="False" 
+                                             Spacing="16">
+                            <BoxView HeightRequest="1" 
+                                     Color="{StaticResource Gray200}" 
+                                     Margin="0,8"/>
+                            
+                            <!-- 读音 -->
+                            <Border StrokeShape="RoundRectangle 12"
+                                    Stroke="Transparent"
+                                    Padding="16,12"
+                                    BackgroundColor="{StaticResource PrimaryLight}">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="🔊 读音" FontSize="12" TextColor="{StaticResource Gray500}" FontAttributes="Bold"/>
+                                    <Label x:Name="LblReading" FontSize="20" TextColor="{StaticResource Primary}" FontAttributes="Bold"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <!-- 释义 -->
+                            <Border StrokeShape="RoundRectangle 12"
+                                    Stroke="Transparent"
+                                    Padding="16,12"
+                                    BackgroundColor="{StaticResource TertiaryLight}">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="📖 释义" FontSize="12" TextColor="{StaticResource Gray500}" FontAttributes="Bold"/>
+                                    <Label x:Name="LblMeaning" FontSize="18"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <!-- 上下文 -->
+                            <VerticalStackLayout x:Name="ContextSection" IsVisible="False" Spacing="4">
+                                <Label Text="📌 上下文" FontSize="12" TextColor="{StaticResource Gray500}" FontAttributes="Bold"/>
+                                <Label x:Name="LblContext" FontSize="15"/>
+                            </VerticalStackLayout>
+
+                            <!-- 例句 -->
+                            <VerticalStackLayout x:Name="ExamplesSection" IsVisible="False" Spacing="4">
+                                <Label Text="📝 例句" FontSize="12" TextColor="{StaticResource Gray500}" FontAttributes="Bold"/>
+                                <Label x:Name="LblExamples" FontSize="15"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+        </Border>
+
+        <!-- 导航按钮 -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,0,0,12">
+            <Button x:Name="BtnPrevious"
+                    Grid.Column="0"
+                    Text="⬅️ 上一个"
+                    Style="{StaticResource SecondaryButton}"
+                    Clicked="OnPreviousClicked"/>
+            <Button x:Name="BtnNext"
+                    Grid.Column="1"
+                    Text="下一个 ➡️"
+                    Clicked="OnNextClicked"/>
+        </Grid>
+
+        <!-- 底部按钮 -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <Button x:Name="BtnShuffleAgain"
+                    Grid.Column="0"
+                    Text="🔄 再来一组"
+                    Style="{StaticResource SuccessButton}"
+                    IsVisible="False"
+                    Clicked="OnShuffleAgainClicked"/>
+            <Button x:Name="BtnExit"
+                    Grid.Column="1"
+                    Text="退出复习"
+                    BackgroundColor="{StaticResource Gray400}"
+                    TextColor="White"
+                    Clicked="OnExitClicked"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

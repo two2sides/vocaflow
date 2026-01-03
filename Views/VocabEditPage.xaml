@@ -1,114 +1,224 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QQLyric2Roma.Views.VocabEditPage"
              Title="编辑词汇">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-            <!-- 语言显示（只读） -->
-            <VerticalStackLayout Spacing="5">
-                <Label Text="语言" FontAttributes="Bold"/>
-                <Label x:Name="LblLanguage" 
-                       Text="日语" 
-                       FontSize="16"
-                       TextColor="Gray"/>
-            </VerticalStackLayout>
-
-            <!-- 词语（必填） -->
-            <VerticalStackLayout Spacing="5">
-                <Label Text="词语 *" FontAttributes="Bold"/>
-                <Entry x:Name="EntryWord" 
-                       Placeholder="请输入词语"
-                       TextChanged="OnRequiredFieldChanged"/>
-                <Label x:Name="LblWordError" 
-                       Text="词语不能为空" 
-                       TextColor="Red" 
-                       FontSize="12"
-                       IsVisible="False"/>
-            </VerticalStackLayout>
-
-            <!-- 读音（必填） -->
-            <VerticalStackLayout Spacing="5">
-                <Label x:Name="LblReadingTitle" Text="读音 *" FontAttributes="Bold"/>
-                <Entry x:Name="EntryReading" 
-                       Placeholder="请输入读音"
-                       TextChanged="OnRequiredFieldChanged"/>
-                <Label x:Name="LblReadingError" 
-                       Text="读音不能为空" 
-                       TextColor="Red" 
-                       FontSize="12"
-                       IsVisible="False"/>
-            </VerticalStackLayout>
-
-            <!-- 意思（必填） -->
-            <VerticalStackLayout Spacing="5">
-                <Label Text="意思 *" FontAttributes="Bold"/>
-                <Entry x:Name="EntryMeaning" 
-                       Placeholder="请输入中文意思"
-                       TextChanged="OnRequiredFieldChanged"/>
-                <Label x:Name="LblMeaningError" 
-                       Text="意思不能为空" 
-                       TextColor="Red" 
-                       FontSize="12"
-                       IsVisible="False"/>
-            </VerticalStackLayout>
-
-            <!-- 上下文 -->
-            <VerticalStackLayout Spacing="5">
-                <Label Text="上下文（出现该词的原句）" FontAttributes="Bold"/>
-                <Editor x:Name="EditorContext" 
-                        Placeholder="词语出现的句子"
-                        HeightRequest="80"
-                        AutoSize="TextChanges"
-                        BackgroundColor="#F5F5F5"/>
-            </VerticalStackLayout>
-
-            <!-- 用法说明 -->
-            <VerticalStackLayout Spacing="5">
-                <Label Text="用法说明" FontAttributes="Bold"/>
-                <Editor x:Name="EditorUsage" 
-                        Placeholder="用法说明（可选）"
-                        HeightRequest="80"
-                        AutoSize="TextChanges"
-                        BackgroundColor="#F5F5F5"/>
-            </VerticalStackLayout>
-
-            <!-- 例句列表 -->
-            <VerticalStackLayout Spacing="10">
-                <Grid ColumnDefinitions="*,Auto">
-                    <Label Grid.Column="0" 
-                           Text="例句" 
+            <!-- 页面标题 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource SurfaceDark}}">
+                <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Label Text="✏️" FontSize="24"/>
+                    <Label Text="编辑词汇" 
+                           FontSize="20" 
                            FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"
                            VerticalOptions="Center"/>
-                    <Button Grid.Column="1"
-                            Text="+ 添加例句"
-                            FontSize="14"
-                            BackgroundColor="{StaticResource Primary}"
-                            TextColor="White"
-                            Padding="15,8"
-                            Clicked="OnAddExampleClicked"/>
-                </Grid>
+                </HorizontalStackLayout>
+            </Border>
 
-                <VerticalStackLayout x:Name="ExamplesContainer" Spacing="10">
-                    <!-- 例句项会动态添加到这里 -->
+            <!-- 语言显示卡片 -->
+            <Border StrokeShape="RoundRectangle 14"
+                    Stroke="Transparent"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SecondaryLight}, Dark={StaticResource SurfaceDark}}">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="🌐" FontSize="18"/>
+                    <Label Text="语言:" FontSize="15" TextColor="{StaticResource Gray500}"/>
+                    <Label x:Name="LblLanguage" 
+                           Text="日语" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Secondary}"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <!-- 基本信息卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="16">
+                    <!-- 词语 -->
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="📝" FontSize="14"/>
+                            <Label Text="词语" FontAttributes="Bold" FontSize="15"/>
+                            <Label Text="*" TextColor="{StaticResource Danger}" FontSize="15"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12,8"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Entry x:Name="EntryWord" 
+                                   Placeholder="请输入词语"
+                                   TextChanged="OnRequiredFieldChanged"
+                                   BackgroundColor="Transparent"/>
+                        </Border>
+                        <Label x:Name="LblWordError" 
+                               Text="⚠️ 词语不能为空" 
+                               TextColor="{StaticResource Danger}" 
+                               FontSize="12"
+                               IsVisible="False"/>
+                    </VerticalStackLayout>
+
+                    <!-- 读音 -->
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="🔊" FontSize="14"/>
+                            <Label x:Name="LblReadingTitle" Text="读音" FontAttributes="Bold" FontSize="15"/>
+                            <Label Text="*" TextColor="{StaticResource Danger}" FontSize="15"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12,8"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Entry x:Name="EntryReading" 
+                                   Placeholder="请输入读音"
+                                   TextChanged="OnRequiredFieldChanged"
+                                   BackgroundColor="Transparent"/>
+                        </Border>
+                        <Label x:Name="LblReadingError" 
+                               Text="⚠️ 读音不能为空" 
+                               TextColor="{StaticResource Danger}" 
+                               FontSize="12"
+                               IsVisible="False"/>
+                    </VerticalStackLayout>
+
+                    <!-- 意思 -->
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="📖" FontSize="14"/>
+                            <Label Text="意思" FontAttributes="Bold" FontSize="15"/>
+                            <Label Text="*" TextColor="{StaticResource Danger}" FontSize="15"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12,8"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Entry x:Name="EntryMeaning" 
+                                   Placeholder="请输入中文意思"
+                                   TextChanged="OnRequiredFieldChanged"
+                                   BackgroundColor="Transparent"/>
+                        </Border>
+                        <Label x:Name="LblMeaningError" 
+                               Text="⚠️ 意思不能为空" 
+                               TextColor="{StaticResource Danger}" 
+                               FontSize="12"
+                               IsVisible="False"/>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
+            </Border>
 
-                <Label x:Name="LblNoExamples"
-                       Text="暂无例句，点击上方按钮添加"
-                       TextColor="Gray"
-                       FontSize="14"
-                       HorizontalOptions="Center"/>
-            </VerticalStackLayout>
+            <!-- 扩展信息卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="16">
+                    <!-- 上下文 -->
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="📌" FontSize="14"/>
+                            <Label Text="上下文（出现该词的原句）" FontAttributes="Bold" FontSize="15"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Editor x:Name="EditorContext" 
+                                    Placeholder="词语出现的句子（可选）"
+                                    HeightRequest="80"
+                                    AutoSize="TextChanges"
+                                    BackgroundColor="Transparent"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- 用法说明 -->
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="💡" FontSize="14"/>
+                            <Label Text="用法说明" FontAttributes="Bold" FontSize="15"/>
+                        </HorizontalStackLayout>
+                        <Border StrokeShape="RoundRectangle 12"
+                                Stroke="{StaticResource Gray200}"
+                                StrokeThickness="1"
+                                Padding="12"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                            <Editor x:Name="EditorUsage" 
+                                    Placeholder="用法说明（可选）"
+                                    HeightRequest="80"
+                                    AutoSize="TextChanges"
+                                    BackgroundColor="Transparent"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 例句卡片 -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="Transparent"
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray400}"
+                            Offset="0,4"
+                            Radius="16"
+                            Opacity="0.08"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="6" VerticalOptions="Center">
+                            <Label Text="📝" FontSize="14"/>
+                            <Label Text="例句" FontAttributes="Bold" FontSize="15"/>
+                        </HorizontalStackLayout>
+                        <Button Grid.Column="1"
+                                Text="➕ 添加"
+                                FontSize="13"
+                                Padding="14,8"
+                                CornerRadius="10"
+                                MinimumHeightRequest="36"
+                                Clicked="OnAddExampleClicked"/>
+                    </Grid>
+
+                    <VerticalStackLayout x:Name="ExamplesContainer" Spacing="10">
+                        <!-- 例句项会动态添加到这里 -->
+                    </VerticalStackLayout>
+
+                    <Label x:Name="LblNoExamples"
+                           Text="✨ 暂无例句，点击上方按钮添加"
+                           TextColor="{StaticResource Gray400}"
+                           FontSize="14"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
 
             <!-- 保存按钮 -->
             <Button x:Name="BtnSave"
-                    Text="保存"
-                    BackgroundColor="{StaticResource Primary}"
-                    TextColor="White"
+                    Text="💾 保存修改"
                     FontSize="16"
-                    Margin="0,20,0,0"
+                    Margin="0,10,0,20"
                     Clicked="OnSaveClicked"/>
 
         </VerticalStackLayout>

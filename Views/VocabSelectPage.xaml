@@ -6,22 +6,34 @@
 
     <Grid RowDefinitions="Auto, Auto, *, Auto"
           Padding="20"
-          RowSpacing="15">
+          RowSpacing="16">
 
-        <!-- 歌曲和语言信息 -->
-        <VerticalStackLayout Grid.Row="0"
-                             Spacing="5">
-            <Label x:Name="LblLanguage"
-                   FontSize="16"
-                   FontAttributes="Bold"/>
-            <Label x:Name="LblCount"
-                   FontSize="14"
-                   TextColor="Gray"/>
-        </VerticalStackLayout>
+        <!-- 顶部信息卡片 -->
+        <Border Grid.Row="0"
+                StrokeShape="RoundRectangle 16"
+                Stroke="Transparent"
+                Padding="20"
+                BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource SurfaceDark}}">
+            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Label Text="📚" FontSize="22"/>
+                    <Label x:Name="LblLanguage"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"/>
+                </HorizontalStackLayout>
+                <Label x:Name="LblCount"
+                       FontSize="14"
+                       TextColor="{StaticResource Gray500}"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
 
-        <!-- 全选/取消 -->
+        <!-- 全选按钮 -->
         <Button Grid.Row="1"
-                Text="全选/取消"
+                Text="☑️ 全选 / 取消"
+                Style="{StaticResource SecondaryButton}"
+                FontSize="14"
                 Clicked="OnToggleAllClicked"/>
 
         <!-- 生词列表 -->
@@ -29,31 +41,42 @@
                         Grid.Row="2">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="0,5"
-                            Padding="15"
-                            BackgroundColor="#F5F5F5"
-                            StrokeShape="RoundRectangle 8"
-                            Stroke="Transparent">
+                    <Border Margin="0,6"
+                            Padding="16"
+                            StrokeShape="RoundRectangle 16"
+                            Stroke="Transparent"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray400}"
+                                    Offset="0,3"
+                                    Radius="10"
+                                    Opacity="0.08"/>
+                        </Border.Shadow>
                         <Grid ColumnDefinitions="Auto, *"
-                              ColumnSpacing="15">
+                              ColumnSpacing="14">
                             <CheckBox Grid.Column="0"
                                       IsChecked="{Binding IsSelected}"
                                       VerticalOptions="Center"/>
                             <VerticalStackLayout Grid.Column="1"
-                                                 Spacing="5">
+                                                 Spacing="6">
                                 <Label Text="{Binding Word}"
                                        FontSize="18"
                                        FontAttributes="Bold"/>
                                 <Label Text="{Binding DisplayReading}"
                                        FontSize="14"
-                                       TextColor="#512BD4"/>
+                                       TextColor="{StaticResource Primary}"/>
                                 <Label Text="{Binding DisplayMeaning}"
                                        FontSize="14"
-                                       TextColor="Gray"/>
-                                <Label Text="{Binding Context}"
-                                       FontSize="12"
-                                       TextColor="#888888"
-                                       IsVisible="{Binding HasContext}"/>
+                                       TextColor="{StaticResource Gray600}"/>
+                                <Border IsVisible="{Binding HasContext}"
+                                        StrokeShape="RoundRectangle 8"
+                                        Stroke="Transparent"
+                                        Padding="10,6"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                                    <Label Text="{Binding Context}"
+                                           FontSize="12"
+                                           TextColor="{StaticResource Gray500}"/>
+                                </Border>
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
@@ -61,11 +84,10 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- 保存 -->
+        <!-- 保存按钮 -->
         <Button Grid.Row="3"
-                Text="保存选中"
-                BackgroundColor="#512BD4"
-                TextColor="White"
+                Text="💾 保存选中"
+                FontSize="16"
                 Clicked="OnSaveSelectedClicked"/>
 
     </Grid>

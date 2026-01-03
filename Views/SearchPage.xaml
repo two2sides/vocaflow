@@ -5,77 +5,138 @@
              Title="搜索">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="10" RowSpacing="15">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="16" RowSpacing="16">
 
-            <!-- 文本提取生词区域 -->
+            <!-- 文本提取生词区域 - 卡片样式 -->
             <Border Grid.Row="0"
-                    Padding="15"
-                    StrokeShape="RoundRectangle 8"
-                    Stroke="{StaticResource Primary}"
-                    BackgroundColor="#F8F8FF">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="直接输入文本提取生词" 
-                           FontSize="16" 
-                           FontAttributes="Bold"/>
-                    <Editor x:Name="EditorTextInput"
-                            Placeholder="在此粘贴或输入任意文本（歌词、文章等）..."
-                            HeightRequest="120"
-                            AutoSize="TextChanges"
-                            BackgroundColor="White"/>
-                    <Grid ColumnDefinitions="*,Auto">
+                    Padding="20"
+                    StrokeShape="RoundRectangle 20"
+                    Stroke="Transparent"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Primary}"
+                            Offset="0,6"
+                            Radius="20"
+                            Opacity="0.1"/>
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="14">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="✨" FontSize="20"/>
+                        <Label Text="文本提取" 
+                               FontSize="18" 
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"/>
+                    </HorizontalStackLayout>
+                    <Label Text="粘贴任意文本（歌词、文章等），AI将帮你提取生词"
+                           FontSize="13"
+                           TextColor="{StaticResource Gray500}"/>
+                    <Border StrokeShape="RoundRectangle 14"
+                            Stroke="{StaticResource Gray200}"
+                            StrokeThickness="1"
+                            Padding="12"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                        <Editor x:Name="EditorTextInput"
+                                Placeholder="在此输入文本..."
+                                HeightRequest="100"
+                                AutoSize="TextChanges"
+                                BackgroundColor="Transparent"/>
+                    </Border>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                         <ActivityIndicator x:Name="VocabLoading"
                                            Grid.Column="0"
                                            IsRunning="False"
-                                           HorizontalOptions="Start"/>
+                                           HorizontalOptions="Start"
+                                           Color="{StaticResource Primary}"/>
                         <Button Grid.Column="1"
-                                Text="提取生词"
-                                BackgroundColor="{StaticResource Primary}"
-                                TextColor="White"
+                                Text="🎯 提取生词"
                                 Clicked="OnExtractVocabFromTextClicked"/>
                     </Grid>
                 </VerticalStackLayout>
             </Border>
 
-            <!-- 分隔线 -->
-            <BoxView Grid.Row="1" 
-                     HeightRequest="1" 
-                     Color="LightGray"
-                     Margin="0,5"/>
+            <!-- 分隔区域 -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,*" Margin="0,4">
+                <BoxView Grid.Column="0" HeightRequest="1" VerticalOptions="Center" Color="{StaticResource Gray200}"/>
+                <Label Grid.Column="1" Text="或" Margin="16,0" TextColor="{StaticResource Gray400}" FontSize="13"/>
+                <BoxView Grid.Column="2" HeightRequest="1" VerticalOptions="Center" Color="{StaticResource Gray200}"/>
+            </Grid>
 
-            <!-- 歌曲搜索区域 -->
-            <Label Grid.Row="2" 
-                   Text="或搜索歌曲获取歌词" 
-                   FontSize="16" 
-                   FontAttributes="Bold"/>
+            <!-- 歌曲搜索区域标题 -->
+            <HorizontalStackLayout Grid.Row="2" Spacing="8">
+                <Label Text="🎵" FontSize="20"/>
+                <Label Text="搜索歌曲" 
+                       FontSize="18" 
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"/>
+            </HorizontalStackLayout>
 
-            <SearchBar x:Name="MusicSearchBar"
-                       Grid.Row="3"
-                       Placeholder="输入歌曲名称搜索..."
-                       SearchButtonPressed="OnSearchButtonPressed"/>
+            <!-- 搜索栏 - 卡片样式 -->
+            <Border Grid.Row="3"
+                    StrokeShape="RoundRectangle 14"
+                    Stroke="Transparent"
+                    Padding="4"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+                <SearchBar x:Name="MusicSearchBar"
+                           Placeholder="输入歌曲名称..."
+                           SearchButtonPressed="OnSearchButtonPressed"
+                           BackgroundColor="Transparent"/>
+            </Border>
 
+            <!-- 搜索结果列表 -->
             <Grid Grid.Row="4">
                 <CollectionView x:Name="ResultList"
                                 SelectionMode="Single"
                                 SelectionChanged="OnSongSelected">
                     <CollectionView.EmptyView>
-                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <VerticalStackLayout VerticalOptions="Center" 
+                                             HorizontalOptions="Center"
+                                             Spacing="12"
+                                             Padding="40">
+                            <Label Text="🔍" FontSize="48" HorizontalOptions="Center"/>
                             <Label Text="搜索结果将显示在这里" 
-                                   FontSize="14" 
-                                   TextColor="Gray"
+                                   FontSize="15" 
+                                   TextColor="{StaticResource Gray400}"
                                    HorizontalOptions="Center"/>
-                        </StackLayout>
+                        </VerticalStackLayout>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="0,5" Padding="15" StrokeShape="RoundRectangle 8" Stroke="Transparent">
-                                <StackLayout>
-                                    <Label Text="{Binding Title}"
-                                           FontSize="18"
-                                           FontAttributes="Bold"/>
-                                    <Label Text="{Binding Artist}"
-                                           FontSize="14"
-                                           TextColor="Gray"/>
-                                </StackLayout>
+                            <Border Margin="0,6" 
+                                    Padding="16" 
+                                    StrokeShape="RoundRectangle 16"
+                                    Stroke="Transparent"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}">
+                                <Border.Shadow>
+                                    <Shadow Brush="{StaticResource Gray400}"
+                                            Offset="0,3"
+                                            Radius="10"
+                                            Opacity="0.1"/>
+                                </Border.Shadow>
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                                    <Border Grid.Column="0"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            StrokeShape="RoundRectangle 12"
+                                            BackgroundColor="{StaticResource PrimaryLight}"
+                                            Stroke="Transparent">
+                                        <Label Text="♪" 
+                                               FontSize="22"
+                                               TextColor="{StaticResource Primary}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" 
+                                                         VerticalOptions="Center"
+                                                         Spacing="4">
+                                        <Label Text="{Binding Title}"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Artist}"
+                                               FontSize="13"
+                                               TextColor="{StaticResource Gray500}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -84,7 +145,8 @@
                 <ActivityIndicator x:Name="LoadingSpinner"
                                    IsRunning="False"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center"/>
+                                   HorizontalOptions="Center"
+                                   Color="{StaticResource Primary}"/>
             </Grid>
 
         </Grid>

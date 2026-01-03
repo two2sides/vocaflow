@@ -94,11 +94,64 @@ public partial class VocabularyPage : ContentPage
 
     #endregion
 
+    private async void OnTabClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        if (button == null) return;
+
+        // 重置所有按钮样式 - 非选中状态
+        BtnLyrics.BackgroundColor = Colors.Transparent;
+        BtnLyrics.TextColor = Application.Current.Resources["Gray600"] as Color ?? Colors.Gray;
+        BtnJapanese.BackgroundColor = Colors.Transparent;
+        BtnJapanese.TextColor = Application.Current.Resources["Gray600"] as Color ?? Colors.Gray;
+        BtnEnglish.BackgroundColor = Colors.Transparent;
+        BtnEnglish.TextColor = Application.Current.Resources["Gray600"] as Color ?? Colors.Gray;
+
+        // 隐藏所有列表
+        LyricsList.IsVisible = false;
+        JapaneseList.IsVisible = false;
+        EnglishList.IsVisible = false;
+
+        // 激活选中的 Tab - 使用主题色
+        var primaryColor = Application.Current.Resources["Primary"] as Color ?? Colors.Purple;
+        button.BackgroundColor = primaryColor;
+        button.TextColor = Colors.White;
+
+        if (button == BtnLyrics)
+        {
+            _currentTab = "lyrics";
+            LyricsList.IsVisible = true;
+            VocabToolbar.IsVisible = false;
+        }
+        else if (button == BtnJapanese)
+        {
+            _currentTab = "ja";
+            JapaneseList.IsVisible = true;
+            VocabToolbar.IsVisible = true;
+        }
+        else if (button == BtnEnglish)
+        {
+            _currentTab = "en";
+            EnglishList.IsVisible = true;
+            VocabToolbar.IsVisible = true;
+        }
+
+        // 切换 Tab 时清空搜索并重新加载
+        VocabSearchBar.Text = "";
+        _searchKeyword = "";
+        await LoadDataAsync();
+    }
+
     private void OnEditModeClicked(object sender, EventArgs e)
     {
         _isEditMode = !_isEditMode;
+        
+        var primaryColor = Application.Current.Resources["Primary"] as Color ?? Colors.Purple;
+        var primaryLightColor = Application.Current.Resources["PrimaryLight"] as Color ?? Colors.LightGray;
+        
         BtnEdit.Text = _isEditMode ? "完成" : "编辑";
-        BtnEdit.BackgroundColor = _isEditMode ? Colors.Gray : Application.Current.Resources["Primary"] as Color ?? Colors.Blue;
+        BtnEdit.BackgroundColor = _isEditMode ? primaryColor : primaryLightColor;
+        BtnEdit.TextColor = _isEditMode ? Colors.White : primaryColor;
         BtnDeleteSelected.IsVisible = _isEditMode;
 
         // 退出编辑模式时清除所有选中状态
@@ -132,53 +185,6 @@ public partial class VocabularyPage : ContentPage
 
         EnglishList.ItemsSource = null;
         EnglishList.ItemsSource = _enVocabs;
-    }
-
-    private async void OnTabClicked(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        if (button == null) return;
-
-        // 重置所有按钮样式
-        BtnLyrics.BackgroundColor = Colors.LightGray;
-        BtnLyrics.TextColor = Colors.Black;
-        BtnJapanese.BackgroundColor = Colors.LightGray;
-        BtnJapanese.TextColor = Colors.Black;
-        BtnEnglish.BackgroundColor = Colors.LightGray;
-        BtnEnglish.TextColor = Colors.Black;
-
-        // 隐藏所有列表
-        LyricsList.IsVisible = false;
-        JapaneseList.IsVisible = false;
-        EnglishList.IsVisible = false;
-
-        // 激活选中的 Tab
-        button.BackgroundColor = Application.Current.Resources["Primary"] as Color ?? Colors.Blue;
-        button.TextColor = Colors.White;
-
-        if (button == BtnLyrics)
-        {
-            _currentTab = "lyrics";
-            LyricsList.IsVisible = true;
-            VocabSearchBar.IsVisible = false;
-        }
-        else if (button == BtnJapanese)
-        {
-            _currentTab = "ja";
-            JapaneseList.IsVisible = true;
-            VocabSearchBar.IsVisible = true;
-        }
-        else if (button == BtnEnglish)
-        {
-            _currentTab = "en";
-            EnglishList.IsVisible = true;
-            VocabSearchBar.IsVisible = true;
-        }
-
-        // 切换 Tab 时清空搜索并重新加载
-        VocabSearchBar.Text = "";
-        _searchKeyword = "";
-        await LoadDataAsync();
     }
 
     private async void OnLyricTapped(object sender, TappedEventArgs e)
@@ -229,6 +235,32 @@ public partial class VocabularyPage : ContentPage
             };
             await Shell.Current.GoToAsync(nameof(VocabEditPage), navigationParameter);
         }
+    }
+
+    private async void OnRandomReviewClicked(object sender, EventArgs e)
+    {
+        // 弹出选择数量
+        var result = await DisplayActionSheet("选择复习数量", "取消", null, "5个", "10个", "20个", "全部");
+        
+        if (result == null || result == "取消") return;
+
+        int count = result switch
+        {
+            "5个" => 5,
+            "10个" => 10,
+            "20个" => 20,
+            "全部" => int.MaxValue,
+            _ => 10
+        };
+
+        // 导航到复习页面
+        var navigationParameter = new Dictionary<string, object>
+        {
+            { "Language", _currentTab },
+            { "Count", count }
+        };
+
+        await Shell.Current.GoToAsync(nameof(VocabReviewPage), navigationParameter);
     }
 
     private async void OnDeleteSelectedClicked(object sender, EventArgs e)

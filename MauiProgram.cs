@@ -28,6 +28,7 @@ namespace QQLyric2Roma
             builder.Services.AddTransient<VocabSelectPage>();
             builder.Services.AddTransient<VocabEditPage>();
             builder.Services.AddTransient<SearchPage>();
+            builder.Services.AddTransient<VocabReviewPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
