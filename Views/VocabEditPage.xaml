@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QQLyric2Roma.Views.VocabEditPage"
+             Title="编辑词汇">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- 语言显示（只读） -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="语言" FontAttributes="Bold"/>
+                <Label x:Name="LblLanguage" 
+                       Text="日语" 
+                       FontSize="16"
+                       TextColor="Gray"/>
+            </VerticalStackLayout>
+
+            <!-- 词语（必填） -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="词语 *" FontAttributes="Bold"/>
+                <Entry x:Name="EntryWord" 
+                       Placeholder="请输入词语"
+                       TextChanged="OnRequiredFieldChanged"/>
+                <Label x:Name="LblWordError" 
+                       Text="词语不能为空" 
+                       TextColor="Red" 
+                       FontSize="12"
+                       IsVisible="False"/>
+            </VerticalStackLayout>
+
+            <!-- 读音（必填） -->
+            <VerticalStackLayout Spacing="5">
+                <Label x:Name="LblReadingTitle" Text="读音 *" FontAttributes="Bold"/>
+                <Entry x:Name="EntryReading" 
+                       Placeholder="请输入读音"
+                       TextChanged="OnRequiredFieldChanged"/>
+                <Label x:Name="LblReadingError" 
+                       Text="读音不能为空" 
+                       TextColor="Red" 
+                       FontSize="12"
+                       IsVisible="False"/>
+            </VerticalStackLayout>
+
+            <!-- 意思（必填） -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="意思 *" FontAttributes="Bold"/>
+                <Entry x:Name="EntryMeaning" 
+                       Placeholder="请输入中文意思"
+                       TextChanged="OnRequiredFieldChanged"/>
+                <Label x:Name="LblMeaningError" 
+                       Text="意思不能为空" 
+                       TextColor="Red" 
+                       FontSize="12"
+                       IsVisible="False"/>
+            </VerticalStackLayout>
+
+            <!-- 上下文 -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="上下文（出现该词的原句）" FontAttributes="Bold"/>
+                <Editor x:Name="EditorContext" 
+                        Placeholder="词语出现的句子"
+                        HeightRequest="80"
+                        AutoSize="TextChanges"
+                        BackgroundColor="#F5F5F5"/>
+            </VerticalStackLayout>
+
+            <!-- 用法说明 -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="用法说明" FontAttributes="Bold"/>
+                <Editor x:Name="EditorUsage" 
+                        Placeholder="用法说明（可选）"
+                        HeightRequest="80"
+                        AutoSize="TextChanges"
+                        BackgroundColor="#F5F5F5"/>
+            </VerticalStackLayout>
+
+            <!-- 例句列表 -->
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0" 
+                           Text="例句" 
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="1"
+                            Text="+ 添加例句"
+                            FontSize="14"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            Padding="15,8"
+                            Clicked="OnAddExampleClicked"/>
+                </Grid>
+
+                <VerticalStackLayout x:Name="ExamplesContainer" Spacing="10">
+                    <!-- 例句项会动态添加到这里 -->
+                </VerticalStackLayout>
+
+                <Label x:Name="LblNoExamples"
+                       Text="暂无例句，点击上方按钮添加"
+                       TextColor="Gray"
+                       FontSize="14"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- 保存按钮 -->
+            <Button x:Name="BtnSave"
+                    Text="保存"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontSize="16"
+                    Margin="0,20,0,0"
+                    Clicked="OnSaveClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

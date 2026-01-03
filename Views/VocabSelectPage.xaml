@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QQLyric2Roma.Views.VocabSelectPage"
+             Title="选择生词">
+
+    <Grid RowDefinitions="Auto, Auto, *, Auto"
+          Padding="20"
+          RowSpacing="15">
+
+        <!-- 歌曲和语言信息 -->
+        <VerticalStackLayout Grid.Row="0"
+                             Spacing="5">
+            <Label x:Name="LblLanguage"
+                   FontSize="16"
+                   FontAttributes="Bold"/>
+            <Label x:Name="LblCount"
+                   FontSize="14"
+                   TextColor="Gray"/>
+        </VerticalStackLayout>
+
+        <!-- 全选/取消 -->
+        <Button Grid.Row="1"
+                Text="全选/取消"
+                Clicked="OnToggleAllClicked"/>
+
+        <!-- 生词列表 -->
+        <CollectionView x:Name="VocabList"
+                        Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,5"
+                            Padding="15"
+                            BackgroundColor="#F5F5F5"
+                            StrokeShape="RoundRectangle 8"
+                            Stroke="Transparent">
+                        <Grid ColumnDefinitions="Auto, *"
+                              ColumnSpacing="15">
+                            <CheckBox Grid.Column="0"
+                                      IsChecked="{Binding IsSelected}"
+                                      VerticalOptions="Center"/>
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="5">
+                                <Label Text="{Binding Word}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding DisplayReading}"
+                                       FontSize="14"
+                                       TextColor="#512BD4"/>
+                                <Label Text="{Binding DisplayMeaning}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                                <Label Text="{Binding Context}"
+                                       FontSize="12"
+                                       TextColor="#888888"
+                                       IsVisible="{Binding HasContext}"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- 保存 -->
+        <Button Grid.Row="3"
+                Text="保存选中"
+                BackgroundColor="#512BD4"
+                TextColor="White"
+                Clicked="OnSaveSelectedClicked"/>
+
+    </Grid>
+
+</ContentPage>

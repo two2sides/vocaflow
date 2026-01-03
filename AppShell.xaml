@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:QQLyric2Roma.Views"
+       x:Class="QQLyric2Roma.AppShell">
+
+    <TabBar>
+        <ShellContent Title="搜索"
+                      Icon="search_icon.png"
+                      ContentTemplate="{DataTemplate views:SearchPage}"/>
+        <ShellContent Title="记忆"
+                      Icon="book_icon.png"
+                      ContentTemplate="{DataTemplate views:VocabularyPage}"/>
+        <ShellContent Title="设置"
+                      Icon="settings_icon.png"
+                      ContentTemplate="{DataTemplate views:SettingsPage}"/>
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QQLyric2Roma.Views.SettingsPage"
+             Title="设置">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="OpenRouter Key" FontAttributes="Bold"/>
+                <Entry x:Name="EntryApiKey" Placeholder="sk-xxxxxxxx" IsPassword="True"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="AI 模型名称 (默认为grok-4.1-fast)" FontAttributes="Bold"/>
+                <Label Text="例如: x-ai/grok-4.1-fast" FontSize="12" TextColor="Gray"/>
+                <Entry x:Name="EntryModel" Placeholder="请输入模型名称" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="5">
+                <Label Text="提取罗马音时的Prompt" FontAttributes="Bold"/>
+                <Editor x:Name="RomaPrompt" 
+                        Placeholder="请输入Prompt"
+                        HeightRequest="150"
+                        AutoSize="TextChanges"
+                        BackgroundColor="#F5F5F5"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="提取生词时的Prompt" FontAttributes="Bold"/>
+                <Editor x:Name="VocabPrompt" 
+                        Placeholder="请输入Prompt"
+                        HeightRequest="150"
+                        AutoSize="TextChanges"
+                        BackgroundColor="#F5F5F5"/>
+            </VerticalStackLayout>
+
+            <Button Text="保存设置" 
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    CornerRadius="8"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

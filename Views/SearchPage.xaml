@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QQLyric2Roma.Views.SearchPage"
+             Title="搜索">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="10" RowSpacing="15">
+
+            <!-- 文本提取生词区域 -->
+            <Border Grid.Row="0"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 8"
+                    Stroke="{StaticResource Primary}"
+                    BackgroundColor="#F8F8FF">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="直接输入文本提取生词" 
+                           FontSize="16" 
+                           FontAttributes="Bold"/>
+                    <Editor x:Name="EditorTextInput"
+                            Placeholder="在此粘贴或输入任意文本（歌词、文章等）..."
+                            HeightRequest="120"
+                            AutoSize="TextChanges"
+                            BackgroundColor="White"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <ActivityIndicator x:Name="VocabLoading"
+                                           Grid.Column="0"
+                                           IsRunning="False"
+                                           HorizontalOptions="Start"/>
+                        <Button Grid.Column="1"
+                                Text="提取生词"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                Clicked="OnExtractVocabFromTextClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 分隔线 -->
+            <BoxView Grid.Row="1" 
+                     HeightRequest="1" 
+                     Color="LightGray"
+                     Margin="0,5"/>
+
+            <!-- 歌曲搜索区域 -->
+            <Label Grid.Row="2" 
+                   Text="或搜索歌曲获取歌词" 
+                   FontSize="16" 
+                   FontAttributes="Bold"/>
+
+            <SearchBar x:Name="MusicSearchBar"
+                       Grid.Row="3"
+                       Placeholder="输入歌曲名称搜索..."
+                       SearchButtonPressed="OnSearchButtonPressed"/>
+
+            <Grid Grid.Row="4">
+                <CollectionView x:Name="ResultList"
+                                SelectionMode="Single"
+                                SelectionChanged="OnSongSelected">
+                    <CollectionView.EmptyView>
+                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Text="搜索结果将显示在这里" 
+                                   FontSize="14" 
+                                   TextColor="Gray"
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,5" Padding="15" StrokeShape="RoundRectangle 8" Stroke="Transparent">
+                                <StackLayout>
+                                    <Label Text="{Binding Title}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding Artist}"
+                                           FontSize="14"
+                                           TextColor="Gray"/>
+                                </StackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <ActivityIndicator x:Name="LoadingSpinner"
+                                   IsRunning="False"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

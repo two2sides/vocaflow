@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QQLyric2Roma.Views.LyricResultPage"
+             Title="歌词详情">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="20">
+
+            <Label x:Name="LblTitle"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+                <Button Grid.Column="0"
+                        Text="AI 生成罗马音"
+                        BackgroundColor="#512BD4"
+                        TextColor="White"
+                        Clicked="OnGenerateRomajiClicked"/>
+                <Button Grid.Column="1"
+                        Text="AI 提取生词"
+                        BackgroundColor="#0078D4"
+                        TextColor="White"
+                        Clicked="OnExtractVocabClicked"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+                <Button Grid.Column="0"
+                        Text="复制原文"
+                        Clicked="OnCopyOriginalClicked"/>
+                <Button Grid.Column="1"
+                        Text="保存歌词"
+                        Clicked="OnSaveVocabClicked"/>
+            </Grid>
+
+            <Label Text="原文歌词:"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0"/>
+
+            <Editor x:Name="EditorOriginal"
+                    AutoSize="TextChanges"
+                    IsReadOnly="True"
+                    BackgroundColor="#F0F0F0"/>
+
+            <Label Text="AI 罗马音 / 翻译:"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0"/>
+
+            <Editor x:Name="EditorRomaji"
+                    AutoSize="TextChanges"
+                    IsReadOnly="True"
+                    BackgroundColor="#E0F7FA"/>
+
+            <ActivityIndicator x:Name="AiLoading"
+                               IsRunning="False"
+                               Color="#512BD4"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
