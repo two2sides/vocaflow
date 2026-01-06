@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
-namespace VocaFlow.Utils // 注意：这里的命名空间根据你的项目自行修改  
+namespace VocaFlow.Utils
 {
     public static class QQMusicApi
     {
